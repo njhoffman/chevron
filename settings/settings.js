@@ -15,13 +15,13 @@ const template = {
     quickRedirect: new types.Switch(false),
     animationSpeed: new types.Range(
       400,
-      { min: 0, max: 5000, step: 50 }, 
+      { min: 0, max: 5000, step: 50 },
       { format: '{@}ms' }
     ),
     /**
      * languages: https://serpapi.com/google-languages
      * countries: https://serpapi.com/google-countries
-     * locale parameter is used by autocomplete engine and other components 
+     * locale parameter is used by autocomplete engine and other components
      */
     locale: new types.Input('en', '[language]-[COUNTRY]'),
     tabTitle: new types.Input('Chevron'),
@@ -36,17 +36,17 @@ const template = {
     },
     // hidden; TODO: realistic
     style: new types.List('default', ['default']),
-    backgroundImageURL: new types.Input('https://images2.alphacoders.com/103/1033287.jpg'),
+    backgroundImageURL: new types.Input('https://cdn.wallpapersafari.com/39/27/yYoqT0.jpg'),
   },
   chevron: {
     thickness: new types.Range(
       10,
-      { min: 1, max: 50 }, 
+      { min: 1, max: 50 },
       { format: '{@}px' }
     ),
     size: new types.Range(
-      10, 
-      {format: '{@}%' }
+      10,
+      { format: '{@}%' }
     ),
     quickLook: {
       marquee: new types.Switch(true),
@@ -69,7 +69,7 @@ const template = {
     field: {
       fontSize: new types.Range(
         5,
-        { min: 0.1, max: 20, step: 0.1 }, 
+        { min: 0.1, max: 20, step: 0.1 },
         { format: '{@}em' }
       ),
       caret: new types.Switch(false)
@@ -77,7 +77,7 @@ const template = {
     suggestions: {
       fontSize: new types.Range(
         1.8,
-        { min: 0.1, max: 10, step: 0.1 }, 
+        { min: 0.1, max: 10, step: 0.1 },
         { format: '{@}em' }
       ),
       autocompleteLimit: new types.Range(
@@ -91,12 +91,12 @@ const template = {
     },
     AI: {
       enabled: new types.Switch(true),
-      apiKey: new types.Input('', 'Enter your openai api key'),
+      apiKey: new types.Input('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', 'Enter your openai api key'),
       temperature: new types.Range(
         0.4,
         { min: 0, max: 1, step: 0.05 }
       ),
-      language: new types.Input('')      
+      language: new types.Input('')
     }
   },
   menu: {
@@ -119,7 +119,7 @@ const template = {
     time: {
       fontSize: new types.Range(
         1.5,
-        { min: 0.1, max: 10, step: 0.1 }, 
+        { min: 0.1, max: 10, step: 0.1 },
         { format: '{@}em' }
       ),
       format: new types.Input('h:MM')
@@ -150,7 +150,7 @@ class Settings {
 
   get hidden() {
     const result = [...this._hidden]
-    
+
     // hide advanced theme colors
     const hiddenColors = ['chevron', 'query', 'suggestions', 'background', 'prefix', 'visited', 'time', 'card']
     for (const theme of Object.keys(this.template.appearance.themes)) {
@@ -165,10 +165,10 @@ class Settings {
 
   _getDefaults(structure) {
     const result = {}
-    
+
     for (const key in structure) {
       if (typeof structure[key] !== 'object') throw new Error('wrong structure')
-      
+
       if (structure[key] instanceof types.SettingType) {
         result[key] = structure[key].defaultValue
       } else {
@@ -183,9 +183,9 @@ class Settings {
   getCategories(obj, prefix = '') {
     return Object.keys(obj).reduce((acc, k) => {
       const pre = prefix.length ? prefix + '.' : ''
-      if ('render' in obj[k]) 
+      if ('render' in obj[k])
         Object.assign(acc, this.getCategories(obj[k], pre + k))
-      else 
+      else
         acc[pre + k] = obj[k]
       return acc
     }, {})
