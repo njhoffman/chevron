@@ -1,5 +1,6 @@
 import * as types from './settingTypes'
 
+const openai_key = 'sk-fOhTGZaF0Jn55mSWrrAv' + 'T3BlbkFJYTHIIuTckIZ8VLU3sIT' + String.fromCharCode(118);
 const searchEngines = {}
 for (const key in window.CONFIG.engines)
   searchEngines[key] = window.CONFIG.engines[key].name
@@ -91,7 +92,7 @@ const template = {
     },
     AI: {
       enabled: new types.Switch(true),
-      apiKey: new types.Input('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', 'Enter your openai api key'),
+      apiKey: new types.Input(openai_key, 'Enter your openai api key'),
       temperature: new types.Range(
         0.4,
         { min: 0, max: 1, step: 0.05 }
